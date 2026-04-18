@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chaneal Conway | Events & Marketing Professional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Abril+Fatface&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --coral: #FF5C3A;
+    --gold: #F4A623;
+    --teal: #00B4A0;
+    --deep-teal: #007A6C;
+    --cream: #FFF8F0;
+    --warm-white: #FFFDF9;
+    --ink: #1A1A2E;
+    --plum: #4A1942;
+    --peach: #FFD6C8;
+    --mint: #C8F0E8;
+    --yellow-light: #FFF3D4;
+    --body-font: 'DM Sans', sans-serif;
+    --display-font: 'Playfair Display', serif;
+    --accent-font: 'Abril Fatface', cursive;
+  }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(–body-font); background: var(–warm-white); color: var(–ink); overflow-x: hidden; }
+
+/* NAV */
+nav {
+position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+display: flex; align-items: center; justify-content: space-between;
+padding: 0 5%; height: 72px;
+background: rgba(255,253,249,0.96);
+backdrop-filter: blur(12px);
+border-bottom: 2px solid var(–coral);
+transition: box-shadow .3s;
+}
+nav.scrolled { box-shadow: 0 4px 24px rgba(255,92,58,.15); }
+.nav-logo { font-family: var(–accent-font); font-size: 1.4rem; color: var(–coral); text-decoration: none; letter-spacing: .5px; }
+.nav-logo span { color: var(–teal); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-size: .9rem; font-weight: 500; color: var(–ink); text-decoration: none; letter-spacing: .5px; position: relative; padding-bottom: 3px; transition: color .2s; }
+.nav-links a::after { content: ‘’; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(–coral); transition: width .25s; }
+.nav-links a:hover { color: var(–coral); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta { background: var(–coral); color: #fff !important; padding: .5rem 1.25rem; border-radius: 50px; font-weight: 600 !important; transition: background .2s, transform .2s !important; }
+.nav-cta:hover { background: var(–plum) !important; transform: translateY(-1px); }
+.nav-cta::after { display: none !important; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+.hamburger span { display: block; width: 26px; height: 2px; background: var(–ink); transition: .3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: var(–warm-white); border-bottom: 2px solid var(–coral); padding: 1.5rem 5%; z-index: 999; flex-direction: column; gap: 1.25rem; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-size: 1.05rem; font-weight: 500; color: var(–ink); text-decoration: none; }
+.mobile-menu a:hover { color: var(–coral); }
+
+/* HERO */
+#hero { min-height: 100vh; padding-top: 72px; background: var(–ink); position: relative; overflow: hidden; display: flex; align-items: center; }
+.hero-blobs { position: absolute; inset: 0; pointer-events: none; }
+.blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .55; }
+.blob-1 { width: 520px; height: 520px; background: var(–coral); top: -120px; right: -100px; animation: drift1 8s ease-in-out infinite alternate; }
+.blob-2 { width: 380px; height: 380px; background: var(–gold); bottom: -80px; left: -80px; animation: drift2 9s ease-in-out infinite alternate; }
+.blob-3 { width: 280px; height: 280px; background: var(–teal); top: 50%; left: 40%; animation: drift3 7s ease-in-out infinite alternate; }
+@keyframes drift1 { from { transform: translate(0,0) scale(1); } to { transform: translate(-40px,40px) scale(1.1); } }
+@keyframes drift2 { from { transform: translate(0,0) scale(1); } to { transform: translate(50px,-30px) scale(1.08); } }
+@keyframes drift3 { from { transform: translate(0,0); } to { transform: translate(-30px,40px); } }
+.hero-inner { position: relative; z-index: 2; max-width: 860px; margin: 0 auto; padding: 6rem 5%; text-align: center; }
+.hero-badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(244,166,35,.18); border: 1px solid rgba(244,166,35,.4); color: var(–gold); font-size: .8rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; padding: .4rem 1rem; border-radius: 50px; margin-bottom: 1.5rem; opacity: 0; transform: translateY(20px); animation: fadeUp .7s .2s forwards; }
+.hero-headline { font-family: var(–display-font); font-size: clamp(2.6rem,5vw,4.2rem); line-height: 1.1; color: #fff; margin-bottom: 1.5rem; opacity: 0; transform: translateY(30px); animation: fadeUp .8s .4s forwards; }
+.hero-headline em { font-style: italic; color: var(–coral); }
+.hero-headline .hl-gold { color: var(–gold); }
+.hero-sub { font-size: 1.1rem; color: rgba(255,255,255,.72); line-height: 1.75; max-width: 560px; margin: 0 auto 2.5rem; opacity: 0; transform: translateY(20px); animation: fadeUp .8s .6s forwards; }
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; opacity: 0; transform: translateY(20px); animation: fadeUp .8s .8s forwards; }
+.btn-primary { background: var(–coral); color: #fff; padding: .85rem 2rem; border-radius: 50px; font-family: var(–body-font); font-weight: 600; font-size: .95rem; text-decoration: none; border: 2px solid var(–coral); transition: background .2s, transform .2s, box-shadow .2s; display: inline-flex; align-items: center; gap: .5rem; }
+.btn-primary:hover { background: #e04428; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,92,58,.4); }
+.btn-secondary { background: transparent; color: #fff; padding: .85rem 2rem; border-radius: 50px; font-family: var(–body-font); font-weight: 600; font-size: .95rem; text-decoration: none; border: 2px solid rgba(255,255,255,.4); transition: border-color .2s, color .2s, transform .2s; }
+.btn-secondary:hover { border-color: var(–gold); color: var(–gold); transform: translateY(-2px); }
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+/* INDUSTRIES STRIP */
+#industries { background: var(–ink); border-top: 1px solid rgba(255,255,255,.08); padding: 3rem 5%; }
+.industries-inner { max-width: 1100px; margin: 0 auto; }
+.industries-label { text-align: center; font-size: .75rem; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 2rem; font-weight: 600; }
+.industries-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem; }
+.industry-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); border-radius: 16px; padding: 1.5rem 1.25rem; text-align: center; transition: background .3s, border-color .3s, transform .3s; }
+.industry-card:hover { background: rgba(255,255,255,.09); border-color: rgba(255,92,58,.3); transform: translateY(-3px); }
+.industry-icon { font-size: 2rem; margin-bottom: .75rem; display: block; }
+.industry-name { font-family: var(–display-font); font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: .4rem; }
+.industry-desc { font-size: .8rem; color: rgba(255,255,255,.55); line-height: 1.6; }
+.industry-card.featured { border-color: rgba(255,92,58,.35); background: rgba(255,92,58,.1); }
+.industry-card.featured .industry-name { color: var(–coral); }
+
+/* SECTION GLOBALS */
+section { padding: 7rem 5%; }
+.container { max-width: 1200px; margin: 0 auto; }
+.section-label { font-size: .75rem; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 700; color: var(–coral); margin-bottom: .75rem; display: flex; align-items: center; gap: .6rem; }
+.section-label::before { content: ‘’; width: 32px; height: 3px; background: var(–coral); border-radius: 2px; flex-shrink: 0; }
+.section-heading { font-family: var(–display-font); font-size: clamp(2rem,4vw,3rem); line-height: 1.15; color: var(–ink); margin-bottom: 1rem; }
+.section-heading em { font-style: italic; color: var(–coral); }
+.section-heading .th { color: var(–teal); }
+.section-sub { font-size: 1.05rem; color: #555; line-height: 1.75; max-width: 640px; }
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity .7s, transform .7s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .7s, transform .7s; }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .7s, transform .7s; }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* ABOUT */
+#about { background: var(–cream); }
+.about-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: center; }
+.about-photo-wrap { position: relative; }
+.about-headshot-colorful {
+width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: top center;
+border-radius: 24px 24px 80px 24px;
+display: block;
+}
+.about-floater { position: absolute; right: -28px; bottom: 60px; background: var(–gold); color: var(–ink); padding: 1rem 1.25rem; border-radius: 16px; font-weight: 700; text-align: center; box-shadow: 0 12px 40px rgba(244,166,35,.4); }
+.about-floater-num { font-family: var(–accent-font); font-size: 2rem; line-height: 1; }
+.about-floater-label { font-size: .7rem; text-transform: uppercase; letter-spacing: 1px; margin-top: .1rem; }
+.about-pills { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1.5rem; margin-bottom: 1.75rem; }
+.pill { font-size: .8rem; font-weight: 600; padding: .4rem 1rem; border-radius: 50px; letter-spacing: .5px; }
+.pill-coral { background: var(–peach); color: var(–coral); }
+.pill-teal { background: var(–mint); color: var(–deep-teal); }
+.pill-gold { background: var(–yellow-light); color: #8a6000; }
+.about-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 2rem; }
+.about-stat { text-align: center; background: #fff; border-radius: 16px; padding: 1.25rem 1rem; border-top: 3px solid var(–coral); box-shadow: 0 4px 20px rgba(0,0,0,.06); }
+.about-stat:nth-child(2) { border-color: var(–teal); }
+.about-stat:nth-child(3) { border-color: var(–gold); }
+.about-stat-num { font-family: var(–accent-font); font-size: 2rem; color: var(–coral); }
+.about-stat:nth-child(2) .about-stat-num { color: var(–teal); }
+.about-stat:nth-child(3) .about-stat-num { color: var(–gold); }
+.about-stat-label { font-size: .75rem; color: #777; margin-top: .25rem; line-height: 1.3; }
+
+/* SERVICES */
+#services { background: var(–warm-white); }
+.services-header { text-align: center; margin-bottom: 4rem; }
+.services-header .section-label { justify-content: center; }
+.services-header .section-label::before { display: none; }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(320px,1fr)); gap: 1.75rem; }
+.service-card { background: #fff; border-radius: 20px; padding: 2rem 1.75rem; border: 2px solid transparent; box-shadow: 0 4px 24px rgba(0,0,0,.06); transition: transform .3s, box-shadow .3s, border-color .3s; position: relative; overflow: hidden; }
+.service-card::before { content: ‘’; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+.service-card.c-coral::before { background: linear-gradient(90deg,var(–coral),var(–gold)); }
+.service-card.c-teal::before { background: linear-gradient(90deg,var(–teal),#00d4b8); }
+.service-card.c-gold::before { background: linear-gradient(90deg,var(–gold),#f7c86e); }
+.service-card.c-plum::before { background: linear-gradient(90deg,var(–plum),var(–coral)); }
+.service-card.c-mix::before { background: linear-gradient(90deg,var(–teal),var(–gold)); }
+.service-card.c-rose::before { background: linear-gradient(90deg,#e8667a,var(–coral)); }
+.service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,.12); }
+.service-card.c-coral:hover { border-color: rgba(255,92,58,.2); }
+.service-card.c-teal:hover { border-color: rgba(0,180,160,.2); }
+.service-card.c-gold:hover { border-color: rgba(244,166,35,.2); }
+.service-icon { width: 54px; height: 54px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 1.25rem; }
+.si-coral { background: var(–peach); }
+.si-teal { background: var(–mint); }
+.si-gold { background: var(–yellow-light); }
+.si-plum { background: #e8d4e6; }
+.si-mix { background: #d4f3f0; }
+.si-rose { background: #fde0e4; }
+.service-name { font-family: var(–display-font); font-size: 1.2rem; font-weight: 700; color: var(–ink); margin-bottom: .75rem; }
+.service-desc { font-size: .9rem; color: #555; line-height: 1.75; }
+
+/* WHY */
+#why { background: var(–ink); position: relative; overflow: hidden; }
+.why-bg-text { position: absolute; top: -40px; left: -20px; font-family: var(–accent-font); font-size: 18rem; color: rgba(255,255,255,.025); pointer-events: none; user-select: none; white-space: nowrap; line-height: 1; }
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.why-left .section-heading { color: #fff; }
+.why-left .section-sub { color: rgba(255,255,255,.65); }
+.why-quote { margin-top: 2.5rem; background: rgba(255,92,58,.12); border: 1px solid rgba(255,92,58,.25); border-left: 4px solid var(–coral); border-radius: 12px; padding: 1.5rem; color: rgba(255,255,255,.85); font-size: 1rem; line-height: 1.8; font-style: italic; }
+.why-items { display: flex; flex-direction: column; gap: 1.25rem; }
+.why-item { display: flex; gap: 1.25rem; align-items: flex-start; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 1.5rem; transition: background .3s, border-color .3s, transform .3s; }
+.why-item:hover { background: rgba(255,255,255,.07); border-color: rgba(255,92,58,.25); transform: translateX(4px); }
+.why-item-icon { width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+.wii-1 { background: rgba(255,92,58,.2); }
+.wii-2 { background: rgba(244,166,35,.2); }
+.wii-3 { background: rgba(0,180,160,.2); }
+.wii-4 { background: rgba(232,102,122,.2); }
+.wii-5 { background: rgba(244,166,35,.2); }
+.wii-6 { background: rgba(0,180,160,.2); }
+.why-item-text h4 { font-family: var(–display-font); font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: .35rem; }
+.why-item-text p { font-size: .875rem; color: rgba(255,255,255,.6); line-height: 1.7; }
+
+/* PORTFOLIO */
+#portfolio { background: var(–cream); }
+.portfolio-header { text-align: center; margin-bottom: 4rem; }
+.portfolio-header .section-label { justify-content: center; }
+.portfolio-header .section-label::before { display: none; }
+.portfolio-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.75rem; }
+.portfolio-card { border-radius: 20px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,.08); background: #fff; transition: transform .3s, box-shadow .3s; }
+.portfolio-card:hover { transform: translateY(-8px); box-shadow: 0 20px 56px rgba(0,0,0,.14); }
+.pc-visual { height: 200px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.pc-v1 { background: linear-gradient(135deg,#1A1A2E,var(–coral)); }
+.pc-v2 { background: linear-gradient(135deg,var(–plum),var(–gold)); }
+.pc-v3 { background: linear-gradient(135deg,var(–deep-teal),#00e0c8); }
+.pc-v4 { background: linear-gradient(135deg,#2d1b69,var(–coral)); }
+.pc-v5 { background: linear-gradient(135deg,#7b2d00,var(–gold)); }
+.pc-v6 { background: linear-gradient(135deg,var(–ink),var(–teal)); }
+.pc-visual-inner { text-align: center; color: #fff; padding: 1.5rem; z-index: 1; }
+.pc-emoji { font-size: 2.8rem; display: block; margin-bottom: .5rem; }
+.pc-event-type { font-size: .7rem; letter-spacing: 1.8px; text-transform: uppercase; font-weight: 700; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.2); padding: .3rem .85rem; border-radius: 50px; display: inline-block; }
+.pc-pattern { position: absolute; inset: 0; opacity: .15; background-image: repeating-linear-gradient(45deg,rgba(255,255,255,.3) 0,rgba(255,255,255,.3) 1px,transparent 0,transparent 50%); background-size: 20px 20px; }
+.pc-industry-tag { font-size: .65rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; background: rgba(255,255,255,.22); border: 1px solid rgba(255,255,255,.3); padding: .25rem .7rem; border-radius: 50px; display: inline-block; margin-top: .4rem; }
+.pc-body { padding: 1.5rem; }
+.pc-name { font-family: var(–display-font); font-size: 1.15rem; font-weight: 700; color: var(–ink); margin-bottom: .5rem; }
+.pc-desc { font-size: .875rem; color: #555; line-height: 1.7; margin-bottom: 1rem; }
+.pc-outcomes { display: flex; flex-direction: column; gap: .4rem; }
+.pc-outcome { display: flex; align-items: center; gap: .5rem; font-size: .8rem; color: #444; font-weight: 500; }
+.pc-outcome::before { content: ‘✓’; color: var(–teal); font-weight: 700; font-size: .9rem; }
+
+/* PROCESS */
+#process { background: linear-gradient(135deg,var(–coral) 0%,var(–gold) 100%); position: relative; overflow: hidden; }
+.process-bg { position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(circle at 10% 50%,rgba(255,255,255,.08) 1px,transparent 1px),radial-gradient(circle at 90% 20%,rgba(255,255,255,.06) 1px,transparent 1px); background-size: 40px 40px; }
+.process-header { text-align: center; margin-bottom: 4rem; }
+.process-header .section-label { justify-content: center; color: rgba(255,255,255,.8); }
+.process-header .section-label::before { background: rgba(255,255,255,.8); }
+.process-header .section-heading { color: #fff; }
+.process-header .section-sub { color: rgba(255,255,255,.8); margin: 0 auto; }
+.process-steps { display: grid; grid-template-columns: repeat(5,1fr); gap: 1rem; position: relative; }
+.process-steps::after { content: ‘’; position: absolute; top: 36px; left: 10%; right: 10%; height: 2px; background: rgba(255,255,255,.25); z-index: 0; }
+.process-step { text-align: center; position: relative; z-index: 1; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 20px; padding: 1.75rem 1.25rem; backdrop-filter: blur(8px); transition: background .3s, transform .3s; }
+.process-step:hover { background: rgba(255,255,255,.2); transform: translateY(-4px); }
+.step-num { width: 52px; height: 52px; border-radius: 50%; background: #fff; color: var(–coral); font-family: var(–accent-font); font-size: 1.5rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; box-shadow: 0 4px 16px rgba(0,0,0,.15); }
+.step-title { font-family: var(–display-font); font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: .5rem; }
+.step-desc { font-size: .8rem; color: rgba(255,255,255,.8); line-height: 1.65; }
+
+/* TESTIMONIALS */
+#testimonials { background: var(–warm-white); }
+.testimonials-header { text-align: center; margin-bottom: 4rem; }
+.testimonials-header .section-label { justify-content: center; }
+.testimonials-header .section-label::before { display: none; }
+.testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.75rem; }
+.testimonial-card { background: #fff; border-radius: 20px; padding: 2rem; box-shadow: 0 4px 24px rgba(0,0,0,.06); border: 2px solid transparent; transition: transform .3s, border-color .3s, box-shadow .3s; }
+.testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,.1); }
+.testimonial-card:nth-child(1):hover { border-color: rgba(255,92,58,.2); }
+.testimonial-card:nth-child(2):hover { border-color: rgba(0,180,160,.2); }
+.testimonial-card:nth-child(3):hover { border-color: rgba(244,166,35,.2); }
+.testimonial-card:nth-child(4):hover { border-color: rgba(255,92,58,.2); }
+.testimonial-card:nth-child(5):hover { border-color: rgba(0,180,160,.2); }
+.testimonial-card:nth-child(6):hover { border-color: rgba(244,166,35,.2); }
+.quote-mark { font-family: var(–accent-font); font-size: 4rem; line-height: .8; color: var(–coral); opacity: .25; margin-bottom: .5rem; }
+.testimonial-card:nth-child(2) .quote-mark, .testimonial-card:nth-child(5) .quote-mark { color: var(–teal); }
+.testimonial-card:nth-child(3) .quote-mark, .testimonial-card:nth-child(6) .quote-mark { color: var(–gold); }
+.testimonial-text { font-size: .95rem; color: #444; line-height: 1.8; margin-bottom: 1.5rem; font-style: italic; }
+.testimonial-stars { color: var(–gold); font-size: .9rem; letter-spacing: 2px; margin-bottom: 1rem; }
+.testimonial-author { display: flex; align-items: center; gap: .875rem; }
+.author-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .9rem; color: #fff; flex-shrink: 0; }
+.av-1 { background: var(–coral); }
+.av-2 { background: var(–teal); }
+.av-3 { background: var(–gold); color: var(–ink); }
+.av-4 { background: var(–plum); }
+.av-5 { background: var(–coral); }
+.av-6 { background: var(–deep-teal); }
+.author-name { font-weight: 700; font-size: .9rem; color: var(–ink); }
+.author-role { font-size: .8rem; color: #888; margin-top: .1rem; }
+
+/* CONTACT */
+#contact { background: var(–ink); position: relative; overflow: hidden; }
+.contact-blob { position: absolute; border-radius: 50%; filter: blur(100px); opacity: .35; pointer-events: none; }
+.cb1 { width: 400px; height: 400px; background: var(–coral); top: -100px; right: -100px; }
+.cb2 { width: 300px; height: 300px; background: var(–teal); bottom: -80px; left: -80px; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; position: relative; z-index: 1; }
+.contact-info .section-heading { color: #fff; }
+.contact-info .section-sub { color: rgba(255,255,255,.65); }
+.contact-portrait {
+width: 88px; height: 88px; border-radius: 50%;
+object-fit: cover; object-position: top center;
+border: 3px solid var(–coral);
+box-shadow: 0 4px 20px rgba(255,92,58,.35);
+flex-shrink: 0;
+}
+.contact-intro { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1.5rem; }
+.contact-intro-text .section-label { margin-bottom: .4rem; }
+.contact-details { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+.contact-detail { display: flex; gap: 1rem; align-items: center; }
+.cd-icon { width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); }
+.cd-text { font-size: .95rem; color: rgba(255,255,255,.8); }
+.cd-label { font-size: .72rem; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: .15rem; }
+.contact-form { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 24px; padding: 2.5rem; backdrop-filter: blur(16px); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.form-group { margin-bottom: 1rem; }
+label { display: block; font-size: .8rem; letter-spacing: .8px; text-transform: uppercase; font-weight: 600; color: rgba(255,255,255,.65); margin-bottom: .5rem; }
+input, select, textarea { width: 100%; background: rgba(255,255,255,.08); border: 1.5px solid rgba(255,255,255,.12); border-radius: 12px; padding: .85rem 1rem; color: #fff; font-family: var(–body-font); font-size: .95rem; transition: border-color .2s, background .2s; outline: none; -webkit-appearance: none; appearance: none; }
+input::placeholder, textarea::placeholder { color: rgba(255,255,255,.3); }
+input:focus, select:focus, textarea:focus { border-color: var(–coral); background: rgba(255,255,255,.1); }
+select option { background: var(–ink); color: #fff; }
+textarea { resize: vertical; min-height: 120px; }
+.form-submit { width: 100%; margin-top: .5rem; background: linear-gradient(135deg,var(–coral),#e03c20); color: #fff; border: none; border-radius: 12px; padding: 1rem; font-family: var(–body-font); font-size: 1rem; font-weight: 700; letter-spacing: .5px; cursor: pointer; transition: transform .2s, box-shadow .2s; }
+.form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,92,58,.4); }
+.form-success { display: none; text-align: center; padding: 2rem; }
+
+/* FOOTER */
+footer { background: #0e0e1f; border-top: 1px solid rgba(255,255,255,.07); padding: 3.5rem 5% 2rem; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; }
+.footer-brand .nav-logo { font-size: 1.6rem; display: block; margin-bottom: 1rem; }
+.footer-tagline { font-size: .9rem; color: rgba(255,255,255,.5); line-height: 1.7; max-width: 260px; }
+.footer-col-title { font-size: .75rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; color: var(–coral); margin-bottom: 1.25rem; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+.footer-links a { color: rgba(255,255,255,.55); text-decoration: none; font-size: .9rem; transition: color .2s; }
+.footer-links a:hover { color: var(–gold); }
+.footer-contact-items { display: flex; flex-direction: column; gap: .75rem; }
+.fci { font-size: .875rem; color: rgba(255,255,255,.55); display: flex; align-items: center; gap: .5rem; }
+.footer-bottom { max-width: 1200px; margin: 2.5rem auto 0; border-top: 1px solid rgba(255,255,255,.07); padding-top: 1.75rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: .8rem; color: rgba(255,255,255,.3); }
+.footer-love { font-size: .8rem; color: rgba(255,255,255,.3); }
+.footer-love span { color: var(–coral); }
+
+/* SCROLL TOP */
+.scroll-top { position: fixed; bottom: 2rem; right: 2rem; z-index: 900; width: 48px; height: 48px; border-radius: 50%; background: var(–coral); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: 0 4px 20px rgba(255,92,58,.4); opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s; }
+.scroll-top.visible { opacity: 1; pointer-events: all; }
+.scroll-top:hover { transform: translateY(-3px); }
+
+/* RESPONSIVE */
+@media (max-width:1024px) {
+.about-grid, .why-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+.portfolio-grid, .testimonials-grid { grid-template-columns: repeat(2,1fr); }
+.process-steps { grid-template-columns: repeat(3,1fr); }
+.process-steps::after { display: none; }
+.about-floater { right: 20px; }
+.footer-inner { grid-template-columns: 1fr 1fr; }
+.industries-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width:768px) {
+.nav-links { display: none; }
+.hamburger { display: flex; }
+section { padding: 5rem 5%; }
+.portfolio-grid, .testimonials-grid { grid-template-columns: 1fr; }
+.process-steps { grid-template-columns: 1fr 1fr; }
+.services-grid { grid-template-columns: 1fr; }
+.form-row { grid-template-columns: 1fr; }
+.footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+.footer-bottom { flex-direction: column; text-align: center; }
+.about-stats { grid-template-columns: repeat(3,1fr); }
+.industries-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width:480px) {
+.hero-btns { flex-direction: column; }
+.about-stats { grid-template-columns: 1fr; }
+.process-steps { grid-template-columns: 1fr; }
+.industries-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Chaneal <span>Conway</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Events</a></li>
+    <li><a href="#process">Process</a></li>
+        <li><a href="#contact" class="nav-cta">Book a Call</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#portfolio" onclick="closeMobile()">Events</a>
+  <a href="#process" onclick="closeMobile()">Process</a>
+    <a href="#contact" onclick="closeMobile()" style="color:var(--coral);font-weight:700;">Book a Consultation →</a>
+</div>
+
+<!-- HERO -->
+
+<section id="hero">
+  <div class="hero-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="hero-inner container">
+    <div class="hero-badge">🎉 Events & Marketing Professional</div>
+    <h1 class="hero-headline">
+      Strategy, Energy, and Execution That <em>Fills the Room</em> and <span class="hl-gold">Builds Real Buzz</span>
+    </h1>
+    <p class="hero-sub">
+      Chaneal Conway helps restaurants, hospitality brands, entertainment venues, and community organizations create events that people actually show up for — and come back to. From sold-out openings to immersive themed nights, I bring the plan and the follow-through.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Book a Free Consultation ✨</a>
+      <a href="#portfolio" class="btn-secondary">See Featured Work →</a>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+
+<section id="industries" style="padding:3.5rem 5%;">
+  <div class="industries-inner">
+    <div class="industries-label">Industries I Work With</div>
+    <div class="industries-grid">
+      <div class="industry-card featured reveal">
+        <span class="industry-icon">🍽️</span>
+        <div class="industry-name">Restaurants & Dining</div>
+        <p class="industry-desc">Grand openings, themed nights, chef collaborations, private dining, and marketing campaigns built for the hospitality world. This is where I do my deepest work.</p>
+      </div>
+      <div class="industry-card reveal">
+        <span class="industry-icon">🎶</span>
+        <div class="industry-name">Entertainment & Venues</div>
+        <p class="industry-desc">Launch events, venue activations, recurring programming, and audience-building strategies for bars, clubs, event spaces, and live entertainment brands.</p>
+      </div>
+      <div class="industry-card reveal">
+        <span class="industry-icon">🤝</span>
+        <div class="industry-name">Brands & Retail</div>
+        <p class="industry-desc">Pop-ups, product launches, community partnership events, and experiential marketing campaigns that turn a brand moment into a lasting impression.</p>
+      </div>
+      <div class="industry-card reveal">
+        <span class="industry-icon">🏛️</span>
+        <div class="industry-name">Community & Nonprofits</div>
+        <p class="industry-desc">Fundraisers, awareness events, community gatherings, and benefit dinners that raise money, build goodwill, and connect organizations with the people they serve.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-photo-wrap reveal-left">
+        <img
+          src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAUEBAYFBQUGBgYHCQ4JCQgICRINDQoOFRIWFhUSFBQXGiEcFxgfGRQUHScdHyIjJSUlFhwpLCgkKyEkJST/2wBDAQYGBgkICREJCREkGBQYJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCT/wAARCAPoAyADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD6pooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACikLBRkkAetUrrXNMssfadQtIc8APKoz+tAF6isG68deGLKLzZ9d09F/67An8hzWTcfGPwPbLufXrducYTLGldDsztKK87/4Xx4LLuq3s7BO4hPNX7b4w+DriQJ/aix5QOWkGAvsT2NF0PkZ2tFc5bfEPwtdy+VDrVm74BwJB3q3L4v0GC7FpLqtpHMRnDyAD86LiszYoqrbapYXj7La8tpmxnEcgY4/CrVMQUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRXL+JviX4W8JRudT1aBZEGfJjO9/pgdPxpXBK51FGa+c/En7U9wXkh0PSooVbIjmuWLMffaOK4R/2h/Hc7DZq8aBsjAiXj9KLmiptn2Bc39rZLuubiKEYz87AcVy2s/FjwjooCS6tDLJ/dhO/H1xXyBrHjrXdZLT3+pzXUjn5t75/T0rBuNbkMRjBck85Bxn2+lGpXs0tz6v1b9o3QoIWGmWVxezY43/ACID7964vVv2jdeuEP2GGzsW24+fDnPr9K+e/wC0pZ4toZhxyUP6VEt1MJBuLYzgc9KLDSij1TXPiv4z1+Ly5tZkKdkiwgJ/DrXBT3t7dO0j3kryFjneSfxqol3IoLxHkcbuc05JcovYk8nOKaRRb826t0jJdiCN2T/FT/tE+3esaqVO5sYO/PpULNEAACpA4YZqKW8EO0lMgjCgHt70WAWXVpSSFJ6fw8ZqD+1ZVB/0GQ46kk0B4GQmMYD9COn0qYSxoFd7iKLH3QQWOKdguTLqspWPZbOsuMBQ569uKkg1i4PmidpUyOTnIP59TVJtSgWXMd4WbGPMChVBqK4lgklCi7RyOMxjjP1oswuOtdXmtJJHtiqOg2sHX69fetCLxPMqBJoo3IIBkWYnJA9uMVjb45VKnlW7jrSPaFyCFyRzj+lZVIPod1DE1aV1F2XY7vQfG2o6PcFo7dJAqhf3hb5iOmfepfFfxK1LxdpdrZ3drDEsCHdswMn64Ga5bQbGQ3WTl9ic47f4V0w0SKWZ0kypXpj0rmim1oerVrShTU6b96TJfA/je88Hasup2cMcrxqUCsDj6/T2r3vwv8AHeDUraNNRgXTwO43ED8a+aIdFbT9SMe0BUJAx6VqrJcxJtVnDZ5HvW04ScdEfNvGYnmcZ6ro0fpf4X8SaXr0Xm6deRTqMZCnke1dJxXxv4X+KV94Mkjt7l5Z7PaAVJJ29Pwr6q8CeM7Lxbo0V7bOC2MMucFT6GuaMm9zsnFNXRpan4r0fSjseZpZv7kK7j+fSua1HxFdyMjWyQ27Ar+9kbeT+HGKzPFeo3RnS3s4BGUXLSE9fYjpXNrLeLIJCiyHpwMZ/Osp1Gtkad7I9K026ubi0jlkl3M43d+DVK5nhiZiNoKksXBB/Cq2hWuowWcUdpGYnYDfMeGB+lLq3hq9vP3lw4mlA5buPTgVhOunozop0nJXZyfiWSS71MGWRQ/ABQck+lX9M0FrVFu5l3y4yxPJGPerX/CPOt5JK7LHjjbV+WKRIRvUsq+/BFKU23dHRGCjqSW0gYN27HNXF+8T7ViW5VVztwffjit6yYSRiQYIPOMVE4lxK09sTnj6c8VlTwtGzA4wa7cRRksSVH1rGfS9zkhgD6GuKrBJaHRFnMxiR2BPJ+nWt/SIgQ7oD6EAUq6V5bAVZ8qK2xnnNYxTRcrH//2Q=="
+          alt="Chaneal Conway"
+          class="about-headshot-colorful"
+        >
+        <div class="about-floater">
+          <div class="about-floater-num">5+</div>
+          <div class="about-floater-label">Years in Events</div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="section-label">About Chaneal</div>
+        <h2 class="section-heading">The Strategist Behind <em>Memorable</em> Events</h2>
+        <div class="about-pills">
+          <span class="pill pill-coral">Event Strategy</span>
+          <span class="pill pill-teal">Marketing</span>
+          <span class="pill pill-gold">Guest Experience</span>
+          <span class="pill pill-coral">Brand Activations</span>
+          <span class="pill pill-teal">Community Events</span>
+        </div>
+        <p style="font-size:1rem;color:#444;line-height:1.85;margin-bottom:1rem;">
+          I'm Chaneal Conway, an events coordinator and marketing professional who works across hospitality, entertainment, retail, and community spaces. My specialty is restaurants — I understand the rhythms of service, the pressure of a big night, and what it takes to turn a dining concept into a destination. But great events follow the same principles in any industry: a clear strategy, smart promotion, and execution that doesn't drop the ball.
+        </p>
+        <p style="font-size:1rem;color:#444;line-height:1.85;margin-bottom:1rem;">
+          I specialize in helping brands and organizations create events that people actually show up for, talk about, and come back to. Whether it's a grand opening, a charity fundraiser, a pop-up activation, or a recurring themed night — I bring structure, creativity, and a calm hand under pressure to every project.
+        </p>
+        <p style="font-size:1rem;color:#444;line-height:1.85;">
+          If you want events that are well-planned, well-promoted, and genuinely enjoyable to be part of — let's talk.
+        </p>
+        <div class="about-stats">
+          <div class="about-stat">
+            <div class="about-stat-num">60+</div>
+            <div class="about-stat-label">Events Produced</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">4+</div>
+            <div class="about-stat-label">Industries Served</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">100%</div>
+            <div class="about-stat-label">Client Repeat Rate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+
+<section id="services">
+  <div class="container">
+    <div class="services-header reveal">
+      <div class="section-label">What I Do</div>
+      <h2 class="section-heading">Services Designed to <span class="th">Drive Results</span></h2>
+      <p class="section-sub" style="margin:.75rem auto 0;">Every service is built around one goal: helping your brand attract the right people, create memorable moments, and build an audience that keeps coming back.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card c-coral reveal">
+        <div class="service-icon si-coral">🎪</div>
+        <div class="service-name">Event Planning & Coordination</div>
+        <p class="service-desc">End-to-end planning tailored to your industry and goals. From concept development and vendor coordination to timeline management and day-of logistics — I handle the details so your team can focus on what matters.</p>
+      </div>
+      <div class="service-card c-gold reveal">
+        <div class="service-icon si-gold">🚀</div>
+        <div class="service-name">Grand Openings & Launch Events</div>
+        <p class="service-desc">First impressions matter. I build anticipation in advance with targeted promotion, local outreach, and a well-choreographed launch event that puts you on the map from day one — for restaurants, venues, pop-ups, and brands alike.</p>
+      </div>
+      <div class="service-card c-teal reveal">
+        <div class="service-icon si-teal">📣</div>
+        <div class="service-name">Event Marketing Campaigns</div>
+        <p class="service-desc">Social media, email marketing, community outreach, and pre-event promotion that makes sure the people you want to reach actually hear about it — and show up. No event should launch cold.</p>
+      </div>
+      <div class="service-card c-plum reveal">
+        <div class="service-icon si-plum">🌙</div>
+        <div class="service-name">Themed Nights & Special Promotions</div>
+        <p class="service-desc">Recurring programming, holiday pop-ups, menu debuts, tastings, and creative themed experiences — designed to give people a compelling reason to choose you and something worth posting about.</p>
+      </div>
+      <div class="service-card c-mix reveal">
+        <div class="service-icon si-mix">🤝</div>
+        <div class="service-name">Community & Partnership Events</div>
+        <p class="service-desc">Fundraisers, benefit events, brand collaborations, and community activations that expand your reach, build goodwill, and connect you to audiences you wouldn't reach alone.</p>
+      </div>
+      <div class="service-card c-rose reveal" style="grid-column:1 / -1;max-width:520px;margin:0 auto;">
+        <div class="service-icon si-rose">⚡</div>
+        <div class="service-name">On-Site Event Management</div>
+        <p class="service-desc">When the event arrives, I'm there. On-site management means every vendor, every detail, and every moment runs as planned — so you can be present with your guests instead of troubleshooting behind the scenes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHANEAL -->
+
+<section id="why">
+  <div class="why-bg-text">Why</div>
+  <div class="container">
+    <div class="why-grid">
+      <div class="reveal-left">
+        <div class="section-label" style="color:rgba(255,255,255,.75);">Why Work With Me</div>
+        <h2 class="section-heading" style="color:#fff;">The Difference Between an <em>Event</em> and an <em>Experience</em></h2>
+        <p class="section-sub" style="color:rgba(255,255,255,.65);">A lot of people can plan an event. Far fewer understand how to make it work as a growth tool — something that builds your brand, grows your audience, and delivers a return worth talking about.</p>
+        <div class="why-quote">
+          "I don't just execute events. I design them to work as marketing tools. Every detail, from the walk-in experience to the last Instagram share, is intentional."<br><br>— Chaneal Conway
+        </div>
+      </div>
+      <div class="why-items reveal-right">
+        <div class="why-item">
+          <div class="why-item-icon wii-1">🎯</div>
+          <div class="why-item-text">
+            <h4>Strategy First, Always</h4>
+            <p>Every event starts with a clear goal — whether that's foot traffic, awareness, revenue, or community connection. The plan builds backward from what success actually looks like.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-icon wii-2">📊</div>
+          <div class="why-item-text">
+            <h4>Marketing Built In, Not Bolted On</h4>
+            <p>Pre-event promotion isn't an afterthought — it's half the job. I make sure your event is known, anticipated, and attended before the doors ever open.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-icon wii-3">✨</div>
+          <div class="why-item-text">
+            <h4>Obsessive Attention to Detail</h4>
+            <p>Signage, timing, vendor communication, guest flow — nothing slips through the cracks. The details guests notice (and the ones they don't) all matter.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-icon wii-4">🔥</div>
+          <div class="why-item-text">
+            <h4>Calm Under Pressure</h4>
+            <p>Events are dynamic. Vendors cancel. Timelines shift. I'm the steady hand in the chaos — solving problems quickly without rattling the room.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-icon wii-5">🔁</div>
+          <div class="why-item-text">
+            <h4>Focused on What Comes Next</h4>
+            <p>A great event isn't just a good night — it's the start of a relationship. I design experiences that turn first-time attendees into loyal advocates for your brand.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-icon wii-6">🌍</div>
+          <div class="why-item-text">
+            <h4>Works Across Industries</h4>
+            <p>From restaurants to retail pop-ups to nonprofit galas — the principles of a great event translate. I bring the same rigor and care to every sector I work in.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+
+<section id="portfolio">
+  <div class="container">
+    <div class="portfolio-header reveal">
+      <div class="section-label">Featured Work</div>
+      <h2 class="section-heading">Events That <em>Delivered</em></h2>
+      <p class="section-sub" style="margin:.75rem auto 0;">A selection of events across industries that achieved real, measurable outcomes.</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-card reveal">
+        <div class="pc-visual pc-v1">
+          <div class="pc-pattern"></div>
+          <div class="pc-visual-inner">
+            <span class="pc-emoji">🌙</span>
+            <span class="pc-event-type">Tasting Series</span>
+            <span class="pc-industry-tag">🍽️ Restaurant</span>
+          </div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Rooftop Wine & Small Plates Series</div>
+          <p class="pc-desc">A curated five-night wine and small plates series at a downtown rooftop restaurant, launched with a full promotional campaign across social, email, and local press.</p>
+          <div class="pc-outcomes">
+            <div class="pc-outcome">Multiple nights sold out in advance</div>
+            <div class="pc-outcome">Strong post-event reservation increase</div>
+            <div class="pc-outcome">Featured in local lifestyle publication</div>
+            <div class="pc-outcome">Renewed as an annual event</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="pc-visual pc-v2">
+          <div class="pc-pattern"></div>
+          <div class="pc-visual-inner">
+            <span class="pc-emoji">🚀</span>
+            <span class="pc-event-type">Grand Opening</span>
+            <span class="pc-industry-tag">🍽️ Restaurant</span>
+          </div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Farm-to-Table Concept Launch</div>
+          <p class="pc-desc">Full grand opening campaign for a new farm-to-table restaurant — including a soft launch media night, local influencer dinners, and a public opening weekend event.</p>
+          <div class="pc-outcomes">
+            <div class="pc-outcome">Strong attendance across opening weekend</div>
+            <div class="pc-outcome">Local press and influencer coverage secured</div>
+            <div class="pc-outcome">Waitlist established within first two weeks</div>
+            <div class="pc-outcome">Booked out for months post-launch</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="pc-visual pc-v3">
+          <div class="pc-pattern"></div>
+          <div class="pc-visual-inner">
+            <span class="pc-emoji">🎶</span>
+            <span class="pc-event-type">Venue Activation</span>
+            <span class="pc-industry-tag">🎶 Entertainment</span>
+          </div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Live Music & Late Night Programming</div>
+          <p class="pc-desc">Recurring weekly programming for a bar and lounge that was struggling with slow midweek nights — built from concept through promotion and on-site management.</p>
+          <div class="pc-outcomes">
+            <div class="pc-outcome">Consistent turnout growth week over week</div>
+            <div class="pc-outcome">New audience segments discovered and engaged</div>
+            <div class="pc-outcome">Became highest-revenue night of the week</div>
+            <div class="pc-outcome">Program expanded to second night</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="pc-visual pc-v4">
+          <div class="pc-pattern"></div>
+          <div class="pc-visual-inner">
+            <span class="pc-emoji">🛍️</span>
+            <span class="pc-event-type">Brand Pop-Up</span>
+            <span class="pc-industry-tag">🤝 Brand & Retail</span>
+          </div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Local Brand Collaboration Pop-Up</div>
+          <p class="pc-desc">A two-day pop-up event pairing a local lifestyle brand with a complementary retail partner — full promotional campaign, event design, vendor coordination, and day-of management.</p>
+          <div class="pc-outcomes">
+            <div class="pc-outcome">New customer acquisition for both brands</div>
+            <div class="pc-outcome">Strong social content generated organically</div>
+            <div class="pc-outcome">Media pickup from local lifestyle outlets</div>
+            <div class="pc-outcome">Follow-on collaboration event booked</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="pc-visual pc-v5">
+          <div class="pc-pattern"></div>
+          <div class="pc-visual-inner">
+            <span class="pc-emoji">🏛️</span>
+            <span class="pc-event-type">Benefit Dinner</span>
+            <span class="pc-industry-tag">🏛️ Nonprofit</span>
+          </div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Community Harvest Benefit Dinner</div>
+          <p class="pc-desc">A partnership event between a neighborhood bistro and local farm, raising funds for a food pantry while building genuine community goodwill and new audience reach.</p>
+          <div class="pc-outcomes">
+            <div class="pc-outcome">Meaningful funds raised for local charity</div>
+            <div class="pc-outcome">Covered by two local news outlets</div>
+            <div class="pc-outcome">Brought new faces into the restaurant</div>
+            <div class="pc-outcome">Strong percentage became repeat customers</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="pc-visual pc-v6">
+          <div class="pc-pattern"></div>
+          <div class="pc-visual-inner">
+            <span class="pc-emoji">🎃</span>
+            <span class="pc-event-type">Themed Experience</span>
+            <span class="pc-industry-tag">🍽️ Restaurant</span>
+          </div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Immersive Seasonal Supper Club</div>
+          <p class="pc-desc">A fully themed supper club event for a Latin restaurant — custom décor, specialty cocktails, live entertainment, exclusive menu, and a guest experience designed from arrival to last bite.</p>
+          <div class="pc-outcomes">
+            <div class="pc-outcome">Multiple seatings, all sold through</div>
+            <div class="pc-outcome">Significant organic social reach in one week</div>
+            <div class="pc-outcome">Highest single-night revenue of the year</div>
+            <div class="pc-outcome">Requested again for following year</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+
+<section id="process">
+  <div class="process-bg"></div>
+  <div class="container">
+    <div class="process-header reveal">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-heading" style="color:#fff;">From First Call to <em style="color:rgba(255,255,255,.85);">Standing Ovation</em></h2>
+      <p class="section-sub">A simple, collaborative process designed to take the planning off your plate and put the energy where it belongs — on your guests.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-num">1</div>
+        <div class="step-title">Discovery Call</div>
+        <p class="step-desc">We talk about your goals, your audience, and what kind of event would move the needle most for you right now.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">2</div>
+        <div class="step-title">Strategy & Proposal</div>
+        <p class="step-desc">I develop a tailored event concept and marketing plan with timeline, budget framework, and projected outcomes for your review.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">3</div>
+        <div class="step-title">Planning & Promotion</div>
+        <p class="step-desc">Vendors, promo assets, ticketing, social content — I execute the full plan while keeping you in the loop at every step.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">4</div>
+        <div class="step-title">Event Day</div>
+        <p class="step-desc">I'm on-site managing every moving part. You focus on your people; I make sure the evening runs exactly as designed.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">5</div>
+        <div class="step-title">Follow-Up & Growth</div>
+        <p class="step-desc">We review outcomes, capture the momentum, and plan what's next to keep building on the audience you've earned.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+  <div class="contact-blob cb1"></div>
+  <div class="contact-blob cb2"></div>
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal-left">
+        <div class="contact-intro">
+          <img
+            src="data:image/jpeg;base64,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RRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAf/9k="
+            alt="Chaneal Conway"
+            class="contact-portrait"
+          >
+          <div class="contact-intro-text">
+            <div class="section-label" style="margin-bottom:.4rem;">Let's Work Together</div>
+            <strong style="color:#fff;font-family:var(--display-font);font-size:1.1rem;">Chaneal Conway</strong>
+          </div>
+        </div>
+        <h2 class="section-heading" style="color:#fff;">Ready to Build Something <em>Worth Showing Up For?</em></h2>
+        <p class="section-sub" style="color:rgba(255,255,255,.65);margin-top:.75rem;">Whether you have a date on the calendar or just a rough idea, I'd love to hear about your brand and start thinking about what we can create together. Fill out the form and let's schedule a free consultation call.</p>
+        <div class="contact-details">
+          <div class="contact-detail">
+            <div class="cd-icon">📧</div>
+            <div class="cd-text">
+              <div class="cd-label">Email</div>
+              chaneal@chaneaconway.com
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="cd-icon">🌐</div>
+            <div class="cd-text">
+              <div class="cd-label">Service Area</div>
+              Available nationwide · Remote & On-Site
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="cd-icon">⏱️</div>
+            <div class="cd-text">
+              <div class="cd-label">Response Time</div>
+              Within 24 business hours
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="contact-form">
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="First & Last Name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="you@yourbrand.com" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000">
+              </div>
+              <div class="form-group">
+                <label for="org">Organization / Brand</label>
+                <input type="text" id="org" name="org" placeholder="Your Business or Brand">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="industry">Industry</label>
+              <select id="industry" name="industry" required>
+                <option value="" disabled selected>Select your industry…</option>
+                <option>Restaurant or Dining</option>
+                <option>Bar, Lounge, or Nightlife</option>
+                <option>Entertainment Venue or Event Space</option>
+                <option>Retail or Consumer Brand</option>
+                <option>Nonprofit or Community Organization</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="event-type">Type of Event or Need</label>
+              <select id="event-type" name="event-type" required>
+                <option value="" disabled selected>Select an event type…</option>
+                <option>Grand Opening or Launch</option>
+                <option>Themed Night or Special Promotion</option>
+                <option>Marketing Campaign</option>
+                <option>Pop-Up or Brand Activation</option>
+                <option>Fundraiser or Benefit Event</option>
+                <option>Community or Partnership Event</option>
+                <option>Recurring Programming</option>
+                <option>On-Site Event Management</option>
+                <option>Not Sure Yet — Let's Talk</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Tell Me About Your Vision</label>
+              <textarea id="message" name="message" placeholder="Share a bit about your organization, the event idea, your timeline, and what success looks like for you…" required></textarea>
+            </div>
+            <button type="submit" class="form-submit">Send My Inquiry — Let's Get Started 🎉</button>
+          </form>
+          <div class="form-success" id="formSuccess">
+            <div style="font-size:2.5rem;margin-bottom:1rem;">🎉</div>
+            <div style="color:#fff;font-size:1.2rem;font-family:var(--display-font);margin-bottom:.5rem;">Message Received!</div>
+            <div style="color:rgba(255,255,255,.65);font-size:.95rem;">Thank you for reaching out. Chaneal will be in touch within 24 hours to schedule your free consultation.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#hero" class="nav-logo">Chaneal <span>Conway</span></a>
+      <p class="footer-tagline">Events and marketing for restaurants, venues, brands, and organizations that want to build something real.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="#about">About Chaneal</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Featured Work</a></li>
+        <li><a href="#process">How It Works</a></li>
+              </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Industries</div>
+      <ul class="footer-links">
+        <li><a href="#industries">Restaurants & Dining</a></li>
+        <li><a href="#industries">Entertainment & Venues</a></li>
+        <li><a href="#industries">Brands & Retail</a></li>
+        <li><a href="#industries">Community & Nonprofits</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <div class="footer-contact-items">
+        <div class="fci"><span>📧</span> chaneal@chaneaconway.com</div>
+        <div class="fci"><span>🌐</span> Nationwide Service</div>
+        <div class="fci"><span>⚡</span> Free Consultation Available</div>
+        <div class="fci"><span>📅</span> Booking 2025–2026</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Chaneal Conway. All rights reserved.</div>
+    <div class="footer-love">Events worth showing up for <span>♥</span></div>
+  </div>
+</footer>
+
+<button class="scroll-top" id="scrollTop" aria-label="Back to top">↑</button>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+    document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
+  });
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
+  document.getElementById('scrollTop').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.form-submit');
+    btn.textContent = 'Sending…';
+    btn.style.opacity = '.7';
+    btn.disabled = true;
+    setTimeout(() => {
+      this.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    }, 1200);
+  });
+</script>
+
+</body>
+</html>
